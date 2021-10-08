@@ -7,7 +7,7 @@ while True:
     input = input("Write your searching message: ")
 
     try:
-        app_id = ''
+        app_id = 'EUT3JX-RUYX537GRV'
         client = wolframalpha.Client(app_id)
         request = client.query(input)
         result = next(request.results).text
