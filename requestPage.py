@@ -1,10 +1,10 @@
 import wikipedia
 import wolframalpha
-from database import insertOneItem
+from database import insertOneItem, findAllWhich
 
-while True:
+def requestHandle(input):
     wikipedia.set_lang('hu')
-    input = input("Write your searching message: ")
+    #input = input("Write your searching message: ")
 
     try:
         app_id = 'EUT3JX-RUYX537GRV'
@@ -21,17 +21,28 @@ while True:
             response = result
 
         insertOneItem(request, response)
-        
+        return response
 
     except:
-        result = wikipedia.summary(input,sentences=3)
+        try:
+            result = wikipedia.summary(input,sentences=3)
 
-        print(result)
+            print(result)
 
-        request = input
-        if len(result) > 200:
-            response = result[0:200]
-        else:
-            response = result
+            request = input
+            if len(result) > 200:
+                response = result[0:200]
+            else:
+                response = result
 
-        insertOneItem(request, response)
+            insertOneItem(request, response)
+            return response
+        except:
+            print("There is an error!")
+            return "Error"
+
+def requestDatabase(operation, input):
+    if operation == 'find':
+        result = findAllWhich(input)
+        return result
+
