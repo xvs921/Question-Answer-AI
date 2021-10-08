@@ -30,6 +30,13 @@ def insertOneItem(request,response):
     
     collection_name.insert_one(request)
 
+def findAllWhich(param):
+    regexAll = '.*'
+    search = regexAll+param+regexAll
+    result = []
+    for item in collection_name.find({'response': { "$regex": search} }):
+        result.append(item)
+    return result
 
 dbname = get_database()
 
