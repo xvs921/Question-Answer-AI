@@ -1,4 +1,7 @@
 import wx
+from requestPage import requestHandle
+import speech_recognition as sr
+import pyttsx3
 
 class MyFrame(wx.Frame):
     def __init__(self):
@@ -22,7 +25,22 @@ class MyFrame(wx.Frame):
     def OnEnter(self, event):
         input = self.txt.GetValue()
         input = input.lower()
-        print("It worked")
+        if input == '':
+            r = sr.Recognizer()
+            with sr.Microphone as source:
+                audio = r.listen(source)
+            try:
+                self.txt.SetValue(r.recognize_google(audio))
+            except sr.UnknownValueError:
+                print("Google speech recognition could not understand audio")
+            except sr.RequestError as e:
+                print("Could not request results for Google speech recognition service: ".format(e))
+        engine = pyttsx3.init()
+        engine.say('The question is: '.input)
+        engine.runAndWait()
+        if len(input) > 0:
+            answer = requestHandle(input)
+            engine.say('The answer is: '.answer)
 
 if __name__ == '__main__':
     app=wx.App(True)
