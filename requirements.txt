@@ -1,0 +1,9 @@
+pymongo
+certifi
+python-dotenv
+wikipedia
+wolframalpha
+wxPython
+SpeechRecognition
+PyAudio
+pyttsx3

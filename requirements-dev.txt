@@ -1,0 +1,8 @@
+# Only what the tests and the linter need (no GUI / audio packages, so it also installs on CI)
+pymongo
+certifi
+python-dotenv
+wikipedia
+wolframalpha
+pytest
+ruff
